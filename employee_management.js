@@ -37,3 +37,26 @@ class Manager extends Employee {
         return`${this.name} - ${this.position}: $${this.salary} + Bonus: $${this.bonus}`;
     }
 }
+
+// Task 4 Handle Bonuses for Managers
+
+class Department {
+    constructor(name) {
+        this.name = name;
+        this.employees=[];
+    }
+    addEmployee(employee){
+        this.employees.push(employee);
+    }
+    getDepartmentSalary() {
+        return this.employees.reduce((total, emp)=> total + emp.salary, 0);
+    }
+    calculateTotalSalaryWithBonus() {
+        return this.employees.reduce((total, emp) => {
+            if (emp instanceof Manager){
+                return total + emp.salary + emp.bonus;   
+            }
+            return total + emp.salary;
+        }, 0); 
+    }
+}
